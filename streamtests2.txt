@@ -1,0 +1,1987 @@
+/** streamtests version 2
+ * after correcting the segfault : sth in the printAux stmts***/
+ * config vars 
+ * numTrials, m (number of elems), nl (number of locales)
+ * 
+ * most of the following tests show correct functionality 
+ * - read the correct backup data and recover the "lost" tasks on time 
+ * 
+ * TODO: issues come up when faults are injected "late" in tthe execution
+ * need to specify what "late" means and how the testing interface can resolve that
+ * otherwise it goes to limitations
+ ***/
+
+//-nl 2 F on 1
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems
+
+ 
+
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+
+
+0::  a=0.84782 b=0.794522 c=0.0177660::  a=2.04366 b=0.869065 c=0.391531 
+0::  a=2.00169 b=0.785563 c=0.4053770::  a=3.0393 b=0.647632 c=0.797222
+
+here 1
+here 2
+
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=0.647632 0.785563
+&&&&& F: 0 arrResSection=0.647632 0.785563
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.797222 0.405377
+
+0 finished recovery +++++++++++++++++++
+here 2
+
+
+
+//--- validation----
+
+0 [[[[[[ myElems=0.794522 0.869065  - myResElems=0.647632 0.785563]]]]]
+0 [[[[[[ myElems=0.794522 0.869065  - myResElems=0.647632 0.785563]]]]]
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=1 myResElems=0.647632 0.785563
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=1 myResElems=0.647632 0.785563
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+here 2
+here 1
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.797222 0.405377
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 finished recovery +++++++++++++++++++
+here 2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=3.0393 2.00169]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=3.0393 2.00169]]]]]
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=1 myResElems=3.0393 2.00169
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=1 myResElems=3.0393 2.00169
+here 2
+here 1
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+ ME = 1 i=(3)
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 3.0393
+ ME = 1 i=(3)
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 2.00169
+ ME = 1 i=(4)
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 3.0393
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 2.00169
+ ME = 1 i=(4)
+0 finished recovery +++++++++++++++++++
+here 2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+--- timing---
+
+Execution time:
+  tot = 0.013264
+  avg = 0.013264
+  min = 0.013264
+Performance (GB/s) = 7.23764e-06
+
+
+///// --m =8 -nl 4  Failure on: 1 ERROR!!!
+
+bash-4.1$ ./stream --m=8 --printArrays=false --printStats=true --useRandomSeed=false -nl 4
+R:-- 0 BUDDY(IES):  1, 2,
+R:-- 1 BUDDY(IES):  2, 3,
+R:-- 2 BUDDY(IES):  3, 0,
+R:-- 3 BUDDY(IES):  0, 1,
+ 2 GUEST(S):  1, 0,R: ---R:userCode set ===================================
+---(PID) NODE 2 PID 31436 
+ 1 GUEST(S):  0, 3,R: ---R:userCode set ===================================
+---(PID) NODE 1 PID 31438 
+ 3 GUEST(S):  2, 1,R: ---R:userCode set ===================================
+---(PID) NODE 3 PID 31437 
+ 0 GUEST(S):  3, 2,R: ---LoaleTree.chpl - chpl_initLocaleTree
+R:userCode set ===================================
+---(PID) NODE 0 PID 31435 
+Number of Locales = 4
+Tasks per locale = 0
+Problem size = 8 (2**3)
+Bytes per array = 64
+Total memory required (GB) = 1.78814e-07
+Number of trials = 1
+
+1 pre task exit R-COMM:(sigUSR1_handler) 1 RECEIVED SIGUSR1  
+--- declare domain & arrays----
+BlockDom.setup() on 0:  guest_lbd block = {1..0} guest_lbd RES block = {7..0}
+BlockDom.setup() on 1:  guest_lbd block = {3..0} guest_lbd RES block = {1..0}
+BlockDom.setup() on 2:  guest_lbd block = {5..0} guest_lbd RES block = {3..0}
+BlockDom.setup() on 3:  guest_lbd block = {7..0} guest_lbd RES block = {5..0}
+BlockDom.setup() on 0:  guest_lbd block = {1..2} guest_lbd RES block = {7..8}
+BlockDom.setup() on 1:  guest_lbd block = {3..4} guest_lbd RES block = {1..2}
+BlockDom.setup() on 2:  guest_lbd block = {5..6} guest_lbd RES block = {3..4}
+BlockDom.setup() on 3:  guest_lbd block = {7..8} guest_lbd RES block = {5..6}
+
+--- init vector----
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+5
+5
+ ME = 2 i=(5)
+0: BlockArr.dsiAcccess (rank)-2 i=(5) returns 0.0
+ ME = 2 i=(5)
+6
+6
+ ME = 2 i=(6)
+0: BlockArr.dsiAcccess (rank)-2 i=(6) returns 0.0
+ ME = 2 i=(6)
+7
+7
+ ME = 3 i=(7)
+0: BlockArr.dsiAcccess (rank)-2 i=(7) returns 0.0
+ ME = 3 i=(7)
+8
+8
+ ME = 3 i=(8)
+0: BlockArr.dsiAcccess (rank)-2 i=(8) returns 0.0
+ ME = 3 i=(8)
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+5
+5
+ ME = 2 i=(5)
+0: BlockArr.dsiAcccess (rank)-2 i=(5) returns 0.0
+ ME = 2 i=(5)
+6
+6
+ ME = 2 i=(6)
+0: BlockArr.dsiAcccess (rank)-2 i=(6) returns 0.0
+ ME = 2 i=(6)
+7
+7
+ ME = 3 i=(7)
+0: BlockArr.dsiAcccess (rank)-2 i=(7) returns 0.0
+ ME = 3 i=(7)
+8
+8
+ ME = 3 i=(8)
+0: BlockArr.dsiAcccess (rank)-2 i=(8) returns 0.0
+ ME = 3 i=(8)
+
+
+
+// --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+0::  a=2.30632 b=0.794522 c=0.503934F: 0 iterating over myElems 
+0::  a=2.33491 b=0.869065 c=0.4886143 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+here 2
+here 2
+
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+
+L: 3 did not UPDATE
+L: 3 did not UPDATE
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+L: 2 did not UPDATE
+L: 2 did not UPDATE
+3--------REGULAR---------myFollowThis=(8..8)
+3--------REGULAR---------myFollowThis=(7..7)
+F: 3 iterating over myElems 
+F: 3 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)
+2--------REGULAR---------myFollowThis=(6..6)
+3--------REGULAR---------myFollowThis=(8..8)
+3--------REGULAR---------myFollowThis=(7..7)
+F: 2 iterating over myElems 
+F: 2 iterating over myElems 
+
+F: 3 iterating over myElems 
+F: 3 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)
+2--------REGULAR---------myFollowThis=(6..6)
+2--------REGULAR---------myFollowThis=(5..5)
+F: 2 iterating over myElems 
+F: 2 iterating over myElems 
+F: 2 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(8..8)
+3--------REGULAR---------myFollowThis=(7..7)
+F: 3 iterating over myElems 
+F: 3 iterating over myElems 
+
+
+
+3::  a=3.07032 b=0.405377 c=0.888313F: 2 iterating over myElems 
+3::  a=3.31573 b=0.797222 c=0.8395012--------REGULAR---------myFollowThis=(6..6)
+
+2::  a=0.0796528 b=0.017766 c=0.0206289here 2
+
+here 2
+here 2
+2::  a=3.01788 b=0.391531 c=0.875451here 1
+
+
+L:2 RECOVERY---------on iter followThis =(5..5) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=2 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+
+
+2::  a=2.96922 b=0.647632 c=0.773862
+&&&&& F: 2 arrResSection=2.96922 0.0
+&&&&& F: 2 arrResSection=0.647632 0.785563
+&&&&& F: 2 arrResSection=0.773862 0.30401
+2 pre task exit 
+//ERROR:
+//test/release/examples/benchmarks/hpcc/stream.chpl:108: error: zippered iterations have non-equal lengths
+2 pre task exit 2 exit - print failed nodes (local view)
+1 FAILED
+
+3 pre task exit bash-4.1$ 
+
+
+
+
+// --m =8 -nl 4 failure on:  2 //ERROR:
+
+bash-4.1$ chpl -o stream test/release/examples/benchmarks/hpcc/stream.chpl -g 
+$CHPL_HOME/modules/standard/IO.chpl:3658: warning: printing _ddata class
+bash-4.1$ ./stream --m=8 --printArrays=false --printStats=true --useRandomSeed=false -nl 4
+R:-- 3 BUDDY(IES):  0, 1,
+R:-- 1 BUDDY(IES):  2, 3,
+R:-- 0 BUDDY(IES):  1, 2,
+R:-- 2 BUDDY(IES):  3, 0,
+ 3 GUEST(S):  2, 1,R: ---R:userCode set ===================================
+---(PID) NODE 3 PID 9719 
+ 2 GUEST(S):  1, 0,R: ---R:userCode set ===================================
+ 1 GUEST(S):  0, 3,R: ---R:userCode set ===================================
+---(PID) NODE 2 PID 9720 
+---(PID) NODE 1 PID 9717 
+ 0 GUEST(S):  3, 2,R: ---LoaleTree.chpl - chpl_initLocaleTree
+R:userCode set ===================================
+---(PID) NODE 0 PID 9718 
+Number of Locales = 4
+Tasks per locale = 0
+Problem size = 8 (2**3)
+Bytes per array = 64
+Total memory required (GB) = 1.78814e-07
+Number of trials = 1
+
+2 pre task exit R-COMM:(sigUSR1_handler) 2 RECEIVED SIGUSR1  
+--- declare domain & arrays----
+
+BlockDom.setup() on 0:  guest_lbd block = {1..0} guest_lbd RES block = {7..0}
+BlockDom.setup() on 1:  guest_lbd block = {3..0} guest_lbd RES block = {1..0}
+BlockDom.setup() on 2:  guest_lbd block = {5..0} guest_lbd RES block = {3..0}
+BlockDom.setup() on 3:  guest_lbd block = {7..0} guest_lbd RES block = {5..0}
+BlockDom.setup() on 0:  guest_lbd block = {1..2} guest_lbd RES block = {7..8}
+BlockDom.setup() on 1:  guest_lbd block = {3..4} guest_lbd RES block = {1..2}
+BlockDom.setup() on 2:  guest_lbd block = {5..6} guest_lbd RES block = {3..4}
+BlockDom.setup() on 3:  guest_lbd block = {7..8} guest_lbd RES block = {5..6}
+--- init vector----
+
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+5
+5
+ ME = 2 i=(5)
+0: BlockArr.dsiAcccess (rank)-2 i=(5) returns 0.0
+ ME = 2 i=(5)
+6
+6
+ ME = 2 i=(6)
+0: BlockArr.dsiAcccess (rank)-2 i=(6) returns 0.0
+ ME = 2 i=(6)
+7
+7
+ ME = 3 i=(7)
+0: BlockArr.dsiAcccess (rank)-2 i=(7) returns 0.0
+ ME = 3 i=(7)
+8
+8
+ ME = 3 i=(8)
+0: BlockArr.dsiAcccess (rank)-2 i=(8) returns 0.0
+ ME = 3 i=(8)
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+5
+5
+ ME = 2 i=(5)
+0: BlockArr.dsiAcccess (rank)-2 i=(5) returns 0.0
+ ME = 2 i=(5)
+6
+6
+ ME = 2 i=(6)
+0: BlockArr.dsiAcccess (rank)-2 i=(6) returns 0.0
+ ME = 2 i=(6)
+7
+7
+ ME = 3 i=(7)
+0: BlockArr.dsiAcccess (rank)-2 i=(7) returns 0.0
+ ME = 3 i=(7)
+8
+8
+ ME = 3 i=(8)
+0: BlockArr.dsiAcccess (rank)-2 i=(8) returns 0.0
+ ME = 3 i=(8)
+
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+0::  a=2.33491 b=0.869065 c=0.4886140::  a=2.30632 b=0.794522 c=0.5039341 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0:here 2
+0:here 2
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 2 did not UPDATE
+L: 2 did not UPDATE
+L: 1 did not UPDATE
+L: 3 did not UPDATE
+L: 3 did not UPDATE
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+F: 1 iterating over myElems 
+3--------REGULAR---------myFollowThis=(7..7)
+F: 3 iterating over myElems 
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 3 iterating over myElems 
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+F: 1 iterating over myElems 
+F: 3 iterating over myElems 
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+F: 1 iterating over myElems 
+3--------REGULAR---------myFollowThis=(7..7)
+F: 3 iterating over myElems 
+1::  a=1.69759 b=0.785563 c=0.304011::  a=2.96922 b=0.647632 c=0.773862F: 3 iterating over myElems 
+3::  a=3.07032 b=0.405377 c=0.8883131:here 2
+3--------REGULAR---------myFollowThis=(7..7)
+1:here 2
+3: here 1
+F: 3 iterating over myElems 
+L:3 RECOVERY---------on iter followThis =(7..7) budyStatus=2 recovered=1 localWorkDone =1 recoveringLocale=3 myStatus=0 COUNTER=0 localResBlockIndices=2
+3::  a=3.31573 b=0.797222 c=0.839501F: 3-------RECOVERY------- myfollowtthis1.low=5 myfollowthis=(5..5)
+F: 3-------RECOVERY------- myfollowtthis1.low=5 myfollowthis=(5..5)
+F: 3-------RECOVERY------- myfollowtthis1.low=5 myfollowthis=(5..5)
+3::  a=0.0796528 b=0.017766 c=0.02062893:here 2
+&&&&& F: 3 arrResSection=0.0796528 0.0
+F: 3-------RECOVERY------- myfollowtthis1.low=6 myfollowthis=(6..6)
+&&&&& F: 3 arrResSection=0.017766 0.391531
+F: 3-------RECOVERY------- myfollowtthis1.low=6 myfollowthis=(6..6)
+//ERROR:
+3 pre task exit test
+//release/examples/benchmarks/hpcc/stream.chpl:108: error: zippered iterations have non-equal lengths
+3 pre task exit 3 exit - print failed nodes (local view)
+2 FAILED
+&&&&& F: 31 pre task exit bash-4.1$ 
+
+
+///???????
+bash-4.1$ 
+bash-4.1$ 
+bash-4.1$ ./stream --m=4 --printArrays=false --printStats=true --useRandomSeed=false -nl 2
+R:-- 0 BUDDY(IES):  1, 0,
+R:-- 1 BUDDY(IES):  0, 1,
+ 1 GUEST(S):  0, 1,R: ---R:userCode set ===================================
+---(PID) NODE 1 PID 9641 
+ 0 GUEST(S):  1, 0,R: ---LoaleTree.chpl - chpl_initLocaleTree
+R:userCode set ===================================
+---(PID) NODE 0 PID 9642 
+Number of Locales = 2
+Tasks per locale = 0
+Problem size = 4 (2**2)
+Bytes per array = 32
+Total memory required (GB) = 8.9407e-08
+Number of trials = 1
+
+--- declare domain & arrays----
+
+BlockDom.setup() on 0:  guest_lbd block = {1..0} guest_lbd RES block = {3..0}
+BlockDom.setup() on 1:  guest_lbd block = {3..0} guest_lbd RES block = {1..0}
+BlockDom.setup() on 0:  guest_lbd block = {1..2} guest_lbd RES block = {3..4}
+BlockDom.setup() on 1:  guest_lbd block = {3..4} guest_lbd RES block = {1..2}
+--- init vector----
+
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+0 BlockArr.these ########################################### 
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+0 iter BlockDom.these () 
+0 iter BlockDom.these a  **************************************** 
+
+1
+1
+0: BlockArr.dsiAcccess (rank)-2 i=(1) returns 0.0
+2
+2
+0: BlockArr.dsiAcccess (rank)-2 i=(2) returns 0.0
+3
+3
+ ME = 1 i=(3)
+0: BlockArr.dsiAcccess (rank)-2 i=(3) returns 0.0
+ ME = 1 i=(3)
+4
+4
+ ME = 1 i=(4)
+0: BlockArr.dsiAcccess (rank)-2 i=(4) returns 0.0
+ ME = 1 i=(4)
+
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+0::  a=2.04366 b=0.869065 c=0.391531F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660:here 2
+0:here 2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1::  a=2.00169 b=0.785563 c=0.4053771::  a=3.0393 b=0.647632 c=0.7972221:here 2
+1:here 2
+--- validation----
+
+0 [[[[[[ myElems=0.794522 0.869065  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.794522 0.869065  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0:here 2
+0:here 2
+1 [[[[[[ myElems=0.647632 0.785563  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.647632 0.785563  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1:here 2
+F: 1 iterating over myElems 
+
+1:here 2
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0:here 2
+0:here 2
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+1 pre task exit 
+// ????????? test/release/examples/benchmarks/hpcc/stream.chpl:192: error: cannot access remote data in local block
+1 pre task exit 1 exit - print failed nodes (local view)
+L: 1 did not UPDATEbash-4.1$ 
+
+
+
+// without validation - error in reduce operations
+//regular m=4 -nl 2 no error 1 trial
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0::  a=2.04366 b=0.869065 c=0.3915310::  a=0.84782 b=0.794522 c=0.0177660:here 2
+0:here 2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1::  a=2.00169 b=0.785563 c=0.4053771::  a=3.0393 b=0.647632 c=0.7972221:here 2
+1:here 2
+--- validation----
+
+--- timing---
+
+Execution time:
+  tot = 0.019346
+  avg = 0.019346
+  min = 0.019346
+Performance (GB/s) = 4.96227e-06
+1 pre task exit 1 exit - print failed nodes (local view)
+0 pre task exit 0 exit - print failed nodes (local view)
+
+
+
+
+
+// without validation - error in reduce operations
+//regular m=4 -nl 2 no error 5 trials
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+0:here 2
+0::  a=2.04366 b=0.869065 c=0.3915310:here 2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1::  a=3.0393 b=0.647632 c=0.7972221::  a=2.00169 b=0.785563 c=0.4053771:here 2
+1:here 2
+Trial #2
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.017766F: 0 iterating over myElems 
+
+0::  a=2.04366 b=0.869065 c=0.3915310:here 2
+0:here 2
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+F: 1 iterating over myElems 
+
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1::  a=3.0393 b=0.647632 c=0.7972221--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1:here 2
+1::  a=2.00169 b=0.785563 c=0.4053771:here 2
+Trial #3
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660::  a=2.04366 b=0.869065 c=0.3915311 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+0:here 2
+0:here 2
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1::  a=3.0393 b=0.647632 c=0.7972221--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1::  a=2.00169 b=0.785563 c=0.4053771:here 2
+1:here 2
+Trial #4
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+L: 1 did not UPDATE
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+0::  a=2.04366 b=0.869065 c=0.391531F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660:here 2
+L: 1 did not UPDATE
+0:here 2
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+1::  a=2.00169 b=0.785563 c=0.405377F: 1 iterating over myElems 
+
+1:here 2
+1::  a=3.0393 b=0.647632 c=0.7972221:here 2
+Trial #5
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.84782 2.04366  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+1 [[[[[[ myElems=3.0393 2.00169  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+L: 1 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+0::  a=2.04366 b=0.869065 c=0.391531F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660:here 2
+0:here 2
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1--------REGULAR---------myFollowThis=(3..3)
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+1::  a=3.0393 b=0.647632 c=0.797222F: 1 iterating over myElems 
+
+1::  a=2.00169 b=0.785563 c=0.4053771:here 2
+1:here 2
+--- validation----
+
+--- timing---
+
+Execution time:
+  tot = 0.190129
+  avg = 0.0380258
+  min = 0.021618
+Performance (GB/s) = 4.44074e-06
+1 pre task exit 1 exit - print failed nodes (local view)
+0 pre task exit 0 exit - print failed nodes (local view)
+bash-4.1$ 
+
+
+//
+// without validation - error in reduce operations
+//regular m=4 -nl 2 1 trial  
+//failure on 1
+
+ --- LOOPS----  //ok
+ 
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0::  a=0.84782 b=0.794522 c=0.0177660::  a=2.04366 b=0.869065 c=0.3915310:here 2
+0: here 1
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+L: 1 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 0-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 0-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+0::  a=3.0393 b=0.647632 c=0.7972220::  a=2.00169 b=0.785563 c=0.405377
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=3.0393 2.00169
+&&&&& F: 0 arrResSection=0.647632 0.785563
+&&&&& F: 0 arrResSection=0.647632 0.785563
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.797222 0.405377
+0 finished recovery +++++++++++++++++++
+0:here 2
+L: 1 did not UPDATE
+--- validation----
+
+--- timing---
+
+Execution time:
+  tot = 0.014056
+  avg = 0.014056
+  min = 0.014056
+Performance (GB/s) = 6.82982e-06
+0 pre task exit 0 exit - print failed nodes (local view)
+1 FAILED
+1 exit - print failed nodes (local view)
+
+
+//
+// without validation - error in reduce operations
+//regular m=8 -nl 4 1 trial   no fail
+
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)
+0--------REGULAR---------myFollowThis=(1..1)
+F: 0 iterating over myElems 
+
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0::  a=2.33491 b=0.869065 c=0.4886143 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+L: 2 did not UPDATE
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0:here 2
+L: 2 did not UPDATE
+L: 3 did not UPDATE
+0::  a=2.30632 b=0.794522 c=0.5039340:here 2
+L: 1 did not UPDATE
+2--------REGULAR---------myFollowThis=(5..5)
+L: 3 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)
+F: 2 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(7..7)
+2--------REGULAR---------myFollowThis=(6..6)
+L: 1 did not UPDATE
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)
+F: 3 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)
+F: 3 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+F: 2 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(7..7)
+F: 1 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)
+F: 3 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)
+1--------REGULAR---------myFollowThis=(4..4)
+F: 3 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)
+F: 2 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(7..7)
+F: 2 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(8..8)
+F: 1 iterating over myElems 
+
+F: 3 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)
+2::  a=0.0796528 b=0.017766 c=0.0206289
+1--------REGULAR---------myFollowThis=(4..4)
+F: 3 iterating over myElems 
+
+1::  a=2.96922 b=0.647632 c=0.7738623::  a=3.31573 b=0.797222 c=0.839501F: 2 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+3::  a=3.07032 b=0.405377 c=0.8883132:here 2
+1:here 2
+3:here 2
+2::  a=3.01788 b=0.391531 c=0.8754511::  a=1.69759 b=0.785563 c=0.304013:here 2
+2:here 2
+1:here 2
+--- validation----
+
+--- timing---
+
+Execution time:
+  tot = 0.061081
+  avg = 0.061081
+  min = 0.061081
+Performance (GB/s) = 3.14337e-06
+2 pre task exit 2 exit - print failed nodes (local view)
+0 pre task exit 0 exit - print failed nodes (local view)
+3 pre task exit 3 exit - print failed nodes (local view)
+1 pre task exit 1 exit - print failed nodes (local view)
+
+
+//
+// without validation - error in reduce operations
+//regular m=8 -nl 4 1 trial  failure on 1
+ 
+ 
+//OKKK
+ --- LOOPS----
+
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+
+0::  a=2.30632 b=0.794522 c=0.503934F: 0 iterating over myElems 
+0::  a=2.33491 b=0.869065 c=0.4886140:here 2
+0:here 2
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 2 did not UPDATE
+L: 1 did not UPDATE
+L: 1 did not UPDATE
+L: 2 did not UPDATE
+L: 3 did not UPDATE
+2--------REGULAR---------myFollowThis=(6..6)
+2--------REGULAR---------myFollowThis=(5..5)
+L: 3 did not UPDATE
+3--------REGULAR---------myFollowThis=(7..7)
+F: 2 iterating over myElems 
+F: 2 iterating over myElems 
+F: 3 iterating over myElems 
+2--------REGULAR---------myFollowThis=(5..5)
+2--------REGULAR---------myFollowThis=(6..6)
+3--------REGULAR---------myFollowThis=(7..7)
+F: 2 iterating over myElems 
+F: 2 iterating over myElems 
+3--------REGULAR---------myFollowThis=(8..8)
+F: 3 iterating over myElems 
+2--------REGULAR---------myFollowThis=(5..5)
+F: 3 iterating over myElems 
+
+3--------REGULAR---------myFollowThis=(7..7)
+F: 2 iterating over myElems 
+2--------REGULAR---------myFollowThis=(6..6)
+3--------REGULAR---------myFollowThis=(8..8)
+F: 3 iterating over myElems 
+
+2::  a=0.0796528 b=0.017766 c=0.0206289F: 2 iterating over myElems 
+
+F: 3 iterating over myElems 
+3::  a=3.31573 b=0.797222 c=0.8395012:here 2
+2::  a=3.01788 b=0.391531 c=0.875451
+3--------REGULAR---------myFollowThis=(8..8)
+3:here 2
+2: here 1
+F: 3 iterating over myElems 
+L:2 RECOVERY---------on iter followThis =(5..5) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=2 myStatus=0 COUNTER=0 localResBlockIndices=2
+3::  a=3.07032 b=0.405377 c=0.8883133:here 2
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+2::  a=2.96922 b=0.647632 c=0.7738622::  a=1.69759 b=0.785563 c=0.30401
+&&&&& F: 2 arrResSection=2.96922 1.69759
+&&&&& F: 2 arrResSection=2.96922 1.69759
+&&&&& F: 2 arrResSection=0.647632 0.785563
+&&&&& F: 2 arrResSection=0.647632 0.785563
+&&&&& F: 2 arrResSection=0.773862 0.30401
+&&&&& F: 2 arrResSection=0.773862 0.30401
+2 finished recovery +++++++++++++++++++
+2:here 2
+--- validation----
+--- timing---
+Execution time:
+  tot = 0.103038
+  avg = 0.103038
+  min = 0.103038
+Performance (GB/s) = 1.86339e-06
+
+1 FAILED
+bash-4.1$ 
+//
+// without validation - error in reduce operations
+//regular m=8 -nl 4 1 trial  failure on 1 & 3 			//OKKO :)
+--- LOOPS----
+Trial #1
+--- main zippered loop----
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)
+0--------REGULAR---------myFollowThis=(2..2)
+F: 0 iterating over myElems 
+0::  a=2.30632 b=0.794522 c=0.503934F: 0 iterating over myElems 
+0::  a=2.33491 b=0.869065 c=0.4886142 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0:here 2
+0: here 1
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+L: 2 did not UPDATE
+L: 1 did not UPDATE
+L: 2 did not UPDATE
+2--------REGULAR---------myFollowThis=(6..6)
+F: 2 iterating over myElems 
+2--------REGULAR---------myFollowThis=(5..5)
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)
+0::  a=3.31573 b=0.797222 c=0.839501&&&&& F: 0 arrResSection=3.31573 0.0
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+2--------REGULAR---------myFollowThis=(6..6)
+F: 2 iterating over myElems 
+2--------REGULAR---------myFollowThis=(6..6)
+F: 2 iterating over myElems 
+
+2::  a=3.01788 b=0.391531 c=0.875451F: 
+0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)
+L: 1 did not UPDATE
+L: 3 did not UPDATE
+L: 3 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)
+0::  a=3.07032 b=0.405377 c=0.888313&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+0 finished recovery +++++++++++++++++++
+0:here 2
+2: here 1
+F: 2 iterating over myElems 
+L:2 RECOVERY---------on iter followThis =(5..5) budyStatus=1 recovered=1 localWorkDone =1 recoveringLocale=2 myStatus=0 COUNTER=0 localResBlockIndices=2
+
+2--------REGULAR---------myFollowThis=(5..5)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+F: 2 iterating over myElems 
+
+F: 2-------RECOVERY------- myfollowtthis1.low=3 myfollowthis=(3..3)
+2::  a=2.96922 b=0.647632 c=0.773862
+2--------REGULAR---------myFollowThis=(5..5)
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+F: 2 iterating over myElems 
+
+2::  a=0.0796528 b=0.017766 c=0.02062892:here 2
+&&&&& F: 2 arrResSection=2.96922 0.0
+F: 2-------RECOVERY------- myfollowtthis1.low=4 myfollowthis=(4..4)
+&&&&& F: 2 arrResSection=0.647632 0.785563
+2::  a=1.69759 b=0.785563 c=0.30401
+&&&&& F: 2 arrResSection=0.773862 0.30401
+&&&&& F: 2 arrResSection=2.96922 1.69759
+&&&&& F: 2 arrResSection=0.647632 0.785563
+&&&&& F: 2 arrResSection=0.773862 0.30401
+2 finished recovery +++++++++++++++++++
+2:here 2
+--- validation----
+--- timing--------
+Execution time:
+  tot = 0.138537
+  avg = 0.138537
+  min = 0.138537
+Performance (GB/s) = 1.38591e-06
+
+1 FAILED
+3 FAILED
+
+
+//./stream --m=8 --printArrays=false --printStats=true --useRandomSeed=false -nl 4 --numTrials=5
+//failure on 3
+
+ --- LOOPS----
+Trial #1
+--- main zippered loop----
+
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+0 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 0 did not UPDATE
+L: 0 did not UPDATE
+0--------REGULAR---------myFollowThis=(1..1)//
+0--------REGULAR---------myFollowThis=(2..2)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)//
+0--------REGULAR---------myFollowThis=(2..2)//
+F: 0 iterating over myElems 
+
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)//
+0--------REGULAR---------myFollowThis=(2..2)//
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0::  a=2.33491 b=0.869065 c=0.488614L: 2 did not UPDATE
+L: 1 did not UPDATE
+L: 3 did not UPDATE
+L: 2 did not UPDATE
+0::  a=2.30632 b=0.794522 c=0.503934L: 1 did not UPDATE
+0: here 1
+2--------REGULAR---------myFollowThis=(5..5)//
+0:here 2
+1--------REGULAR---------myFollowThis=(4..4)//
+2--------REGULAR---------myFollowThis=(6..6)//
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 2 iterating over myElems 
+
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+0::  a=3.31573 b=0.797222 c=0.8395010::  a=3.07032 b=0.405377 c=0.888313
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+1--------REGULAR---------myFollowThis=(3..3)//
+&&&&& F: 0 arrResSection=0.797222 0.405377
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)//
+&&&&& F: 0 arrResSection=0.839501 0.888313
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 2 iterating over myElems 
+
+0 finished recovery +++++++++++++++++++
+0:here 2
+F: 2 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+1::  a=1.69759 b=0.785563 c=0.30401L: 3 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)//
+2--------REGULAR---------myFollowThis=(6..6)//
+2--------REGULAR---------myFollowThis=(5..5)//
+1:here 2
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 2 iterating over myElems 
+
+2::  a=3.01788 b=0.391531 c=0.875451F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//  OK 1st trial
+1::  a=2.96922 b=0.647632 c=0.7738622:here 2
+F: 2 iterating over myElems 
+
+1:here 2
+2::  a=0.0796528 b=0.017766 c=0.02062892:here 2
+
+
+//--Trial #2
+--- main zippered loop----
+
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+0::  a=2.33491 b=0.869065 c=0.488614F: 0 iterating over myElems 
+
+0::  a=2.30632 b=0.794522 c=0.5039340: here 1
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+0:here 2
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+0::  a=3.31573 b=0.797222 c=0.839501&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+L: 1 did not UPDATE
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 2 did not UPDATE
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 1 did not UPDATE
+0::  a=3.07032 b=0.405377 c=0.888313L: 2 did not UPDATE
+1--------REGULAR---------myFollowThis=(3..3)//
+2--------REGULAR---------myFollowThis=(6..6)//
+L: 3 did not UPDATE
+L: 3 did not UPDATE
+&&&&& F: 0 arrResSection=3.31573 3.07032
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 2 iterating over myElems 
+
+&&&&& F: 0 arrResSection=0.797222 0.405377
+1--------REGULAR---------myFollowThis=(3..3)//
+&&&&& F: 0 arrResSection=0.839501 0.888313
+2--------REGULAR---------myFollowThis=(6..6)//
+F: 1 iterating over myElems 
+
+0 finished recovery +++++++++++++++++++
+F: 2 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+0:here 2
+1--------REGULAR---------myFollowThis=(3..3)//
+1--------REGULAR---------myFollowThis=(4..4)//
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)//
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1::  a=2.96922 b=0.647632 c=0.773862F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+1:here 2
+2::  a=3.01788 b=0.391531 c=0.875451
+2--------REGULAR---------myFollowThis=(5..5)//
+2:here 2
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)// 2nd triall  OK!!
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1::  a=1.69759 b=0.785563 c=0.304012::  a=0.0796528 b=0.017766 c=0.02062891:here 2
+2:here 2
+Trial #3
+--- main zippered loop----
+
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(1..1)//
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+0--------REGULAR---------myFollowThis=(2..2)//
+F: 0 iterating over myElems 
+
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+0::  a=2.30632 b=0.794522 c=0.503934F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+L: 2 did not UPDATE
+L: 3 did not UPDATE
+L: 1 did not UPDATE
+L: 3 did not UPDATE
+0:here 2
+L: 2 did not UPDATE
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+F: 0 iterating over myElems 
+
+0::  a=2.33491 b=0.869065 c=0.4886140: here 1
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+L: 1 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+0::  a=3.07032 b=0.405377 c=0.888313
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+0::  a=3.31573 b=0.797222 c=0.839501
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+2--------REGULAR---------myFollowThis=(6..6)//
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+0 finished recovery +++++++++++++++++++
+0:here 2
+1--------REGULAR---------myFollowThis=(4..4)//
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 2 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 2 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)//
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 2 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)//
+1--------REGULAR---------myFollowThis=(3..3)// trial 3  OK!!
+1::  a=1.69759 b=0.785563 c=0.304011:here 2
+F: 2 iterating over myElems 
+
+F: 1 iterating over myElems 
+
+2::  a=0.0796528 b=0.017766 c=0.02062892::  a=3.01788 b=0.391531 c=0.8754511::  a=2.96922 b=0.647632 c=0.7738621:here 2
+2:here 2
+2:here 2
+Trial #4
+--- main zippered loop----
+
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+0::  a=2.33491 b=0.869065 c=0.488614F: 0 iterating over myElems 
+
+0::  a=2.30632 b=0.794522 c=0.5039342 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+0: here 1
+0:here 2
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+L: 1 did not UPDATE
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 1 iterating over myElems 
+
+1::  a=1.69759 b=0.785563 c=0.304011:here 2
+L: 2 did not UPDATE
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 2 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+L: 1 did not UPDATE
+2--------REGULAR---------myFollowThis=(5..5)//
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+L: 3 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+1--------REGULAR---------myFollowThis=(3..3)//
+2--------REGULAR---------myFollowThis=(6..6)//
+F: 2 iterating over myElems 
+
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+0::  a=3.31573 b=0.797222 c=0.8395010::  a=3.07032 b=0.405377 c=0.888313F: 1 iterating over myElems 
+
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 2 iterating over myElems 
+
+L: 3 did not UPDATE
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+0 finished recovery +++++++++++++++++++
+0:here 2
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 2 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)//
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 2 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6)// trial 4  ok!!!
+F: 1 iterating over myElems 
+
+2::  a=0.0796528 b=0.017766 c=0.0206289F: 2 iterating over myElems 
+
+1::  a=2.96922 b=0.647632 c=0.7738622:here 2
+2::  a=3.01788 b=0.391531 c=0.8754511:here 2
+2:here 2
+//--Trial #5
+--- main zippered loop----
+
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+0 [[[[[[ myElems=2.30632 2.33491  - myResElems=3.31573 3.07032]]]]]
+L: NOT UPDATING 0 on iter followThis =(0..0)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+0--------REGULAR---------myFollowThis=(1..1)//
+L: NOT UPDATING 0 on iter followThis =(1..1)  NO UPDATE for myG=3 myResElems=3.31573 3.07032
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+3 [[[[[[ myElems=0.0 0.0  - myResElems=0.0 0.0]]]]]
+1 [[[[[[ myElems=2.96922 1.69759  - myResElems=0.0 0.0]]]]]
+0--------REGULAR---------myFollowThis=(1..1)//
+F: 0 iterating over myElems 
+
+F: 0 iterating over myElems 
+
+0--------REGULAR---------myFollowThis=(2..2)//
+L: 2 did not UPDATE
+L: 3 did not UPDATE
+L: 3 did not UPDATE
+0::  a=2.30632 b=0.794522 c=0.5039340:here 2
+L: 1 did not UPDATE
+F: 0 iterating over myElems 
+
+0::  a=2.33491 b=0.869065 c=0.4886140: here 1
+L:0 RECOVERY---------on iter followThis =(1..1) budyStatus=3 recovered=1 localWorkDone =1 recoveringLocale=0 myStatus=0 COUNTER=0 localResBlockIndices=2
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+F: 0-------RECOVERY------- myfollowtthis1.low=7 myfollowthis=(7..7)//
+0::  a=3.31573 b=0.797222 c=0.839501&&&&& F: 0 arrResSection=3.31573 3.07032
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+L: 1 did not UPDATE
+2--------REGULAR---------myFollowThis=(6..6)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)//
+2 [[[[[[ myElems=0.0796528 3.01788  - myResElems=0.0 0.0]]]]]
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+L: 2 did not UPDATE
+F: 0-------RECOVERY------- myfollowtthis1.low=8 myfollowthis=(8..8)
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(6..6).//
+0::  a=3.07032 b=0.405377 c=0.888313
+2--------REGULAR---------myFollowThis=(5..5)//
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+&&&&& F: 0 arrResSection=3.31573 3.07032
+F: 2 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(3..3)//
+&&&&& F: 0 arrResSection=0.797222 0.405377
+&&&&& F: 0 arrResSection=0.839501 0.888313
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//
+2--------REGULAR---------myFollowThis=(6..6)//
+0 finished recovery +++++++++++++++++++
+F: 1 iterating over myElems 
+
+1--------REGULAR---------myFollowThis=(4..4)//
+F: 2 iterating over myElems 
+
+0:here 2
+1--------REGULAR---------myFollowThis=(3..3)//
+F: 1 iterating over myElems 
+
+2--------REGULAR---------myFollowThis=(5..5)//  ookok!!
+F: 1 iterating over myElems 
+
+F: 2 iterating over myElems 
+
+1::  a=1.69759 b=0.785563 c=0.30401F: 2 iterating over myElems 
+
+1::  a=2.96922 b=0.647632 c=0.7738622::  a=3.01788 b=0.391531 c=0.8754511:here 2
+2::  a=0.0796528 b=0.017766 c=0.02062891:here 2
+2:here 2
+2:here 2
+--- validation----
+
+--- timing---
+
+Execution time:
+  tot = 0.428566
+  avg = 0.0857132
+  min = 0.071172
+Performance (GB/s) = 2.69769e-06
+2 pre task exit 2 exit - print failed nodes (local view)
+0 pre task exit 0 exit - print failed nodes (local view)
+3 FAILED
+3 exit - print failed nodes (local view)
+1 pre task exit 1 exit - print failed nodes (local view)
+bash-4.1$ 
+
+
